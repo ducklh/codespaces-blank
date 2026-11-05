@@ -130,7 +130,7 @@ svg {
   flex-wrap: wrap !important;
 }
 
-.page-shell[data-responsive="reflow"] .design-screen div[class*="flex"][class*="h-["] {
+.page-shell[data-responsive="reflow"] .design-screen div[class*="flex"][class*="h-["]:not(.absolute) {
   height: auto !important;
   min-height: 0 !important;
 }
@@ -141,7 +141,8 @@ svg {
 
 .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name] {
   white-space: normal !important;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="IMAGE [USER_PHOTO_"].absolute {
@@ -265,11 +266,28 @@ svg {
 @media (max-width: 600px) {
   .review-modal {
     justify-content: flex-start;
+    width: 100%;
+    overflow-x: hidden;
   }
 
   .review-modal-frame {
-    width: 100vw;
-    flex-basis: 100vw;
+    width: 100%;
+    min-width: 0;
+    flex-basis: 100%;
+  }
+
+  .review-modal .design-review-screen [data-pencil-name="Reader Panel"] {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .review-modal .review-modal-frame .page-shell[data-responsive="reflow"] .design-review-screen [data-pencil-name="Close Button"] {
+    top: 16px !important;
+    right: 16px !important;
+    left: auto !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-height: 44px !important;
   }
 }
 
@@ -337,7 +355,268 @@ svg {
   }
 }
 
+@media (max-width: 800px) {
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Trip Stats"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 16px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Trip Stats"] [data-pencil-name^="Stat —"] {
+    width: auto !important;
+    min-width: 0 !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Trip Stats"] [data-pencil-name="Stat Divider"] {
+    display: none !important;
+  }
+}
+
+@media (max-width: 960px) {
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Dashboard Inner"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 20px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Dashboard Inner"] [data-pencil-name="Donut Wrap"] {
+    max-width: 100% !important;
+    align-self: center;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Dashboard Inner"] [data-pencil-name="Cost Legend"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Dashboard Inner"] [data-pencil-name="Quick Facts"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Dashboard Inner"] > [data-pencil-name="Divider"] {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Timeline Section"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 24px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Timeline Column"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Sidebar"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Book Transport Section"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 16px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Book Transport Section"] [data-pencil-name="Book Intro"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Book Transport Section"] [data-pencil-name^="Pass Card —"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Packing Card"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Packing Card"] [data-pencil-name^="Pack Column —"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Booking Row —"] {
+    display: grid !important;
+    grid-template-columns: 24px minmax(0, 1fr) auto;
+    align-items: start !important;
+    column-gap: 10px !important;
+    row-gap: 8px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Booking Row —"] [data-pencil-name="Row Icon"] {
+    grid-column: 1;
+    grid-row: 1;
+    width: 24px !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Booking Row —"] [data-pencil-name="Row Text"] {
+    grid-column: 2;
+    grid-row: 1;
+    width: auto !important;
+    min-width: 0 !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Booking Row —"] [data-pencil-name="Fare"] {
+    grid-column: 3;
+    grid-row: 1;
+    width: auto !important;
+    flex: none !important;
+    white-space: nowrap !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Booking Row —"] [data-pencil-name="CTA — Book"] {
+    grid-column: 2 / 4;
+    grid-row: 2;
+    width: fit-content !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Atlas Notes"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Atlas Notes"] [data-pencil-name^="Atlas Column —"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Booking Band Inner"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Booking Band Inner"] [data-pencil-name^="Offer —"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Black Book Row —"] {
+    display: grid !important;
+    grid-template-columns: 24px minmax(0, 1fr) auto;
+    align-items: start !important;
+    column-gap: 10px !important;
+    row-gap: 8px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Black Book Row —"] [data-pencil-name="Icon Wrap"] {
+    grid-column: 1;
+    grid-row: 1;
+    width: 24px !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Black Book Row —"] [data-pencil-name="Row Text"] {
+    grid-column: 2;
+    grid-row: 1;
+    width: auto !important;
+    min-width: 0 !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Black Book Row —"] [data-pencil-name="Place Price"] {
+    grid-column: 3;
+    grid-row: 1;
+    width: auto !important;
+    flex: none !important;
+    white-space: nowrap !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Black Book Row —"] [data-pencil-name="CTA — Reserve"] {
+    grid-column: 2 / 4;
+    grid-row: 2;
+    width: fit-content !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="More Row"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="More Row"] [data-pencil-name^="Story Card —"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+}
+
 @media (max-width: 600px) {
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Lightbox Preview"] > [data-pencil-name="Lightbox Close"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Lightbox Preview"] > [data-pencil-name="Lightbox Nav"] {
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen div[data-pencil-name="Lightbox Close"][class*="h-["],
+  .page-shell[data-responsive="reflow"] .design-screen div[data-pencil-name="Lightbox Nav"][class*="h-["] {
+    top: 50% !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    transform: translateY(-50%);
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Lightbox Preview"] > [data-pencil-name="Lightbox Close"] {
+    top: 12px !important;
+    right: 12px !important;
+    left: auto !important;
+    transform: none;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen div[data-pencil-name="Lightbox Close"][class*="h-["] {
+    top: 12px !important;
+    right: 12px !important;
+    left: auto !important;
+    transform: none;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Lightbox Preview"] > [data-pencil-name="Lightbox Nav"]:nth-child(4) {
+    left: 12px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Lightbox Preview"] > [data-pencil-name="Lightbox Nav"]:nth-child(5) {
+    right: 12px !important;
+    left: auto !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Lightbox Preview"] > [data-pencil-name="Lightbox Footer"] {
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    top: auto !important;
+    width: 100% !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Region Banner"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Region Banner"] [data-pencil-name^="Region Card —"] {
+    width: 100% !important;
+    max-width: none !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Destination Grid"] > [data-pencil-name^="Column"] {
+    width: 100% !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Destination Grid"] [data-pencil-name^="Destination —"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+  }
+
   .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Pin Index"] [data-pencil-name="Index Head"] {
     flex-direction: column !important;
     align-items: flex-start !important;

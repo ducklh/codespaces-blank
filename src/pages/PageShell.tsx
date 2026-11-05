@@ -77,7 +77,9 @@ export default function PageShell({ children }: { children: ReactNode }) {
         }
 
         if (fontMatch) {
-          const fontSize = Math.max(14, Number(fontMatch[1]) * scale);
+          const sourceFontSize = Number(fontMatch[1]);
+          const minimumFontSize = sourceFontSize <= 12 ? 12 : 14;
+          const fontSize = Math.max(minimumFontSize, sourceFontSize * scale);
           responsiveValues.set("font-size", `${fontSize}px`);
           responsiveValues.set(
             "line-height",
