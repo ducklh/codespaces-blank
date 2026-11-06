@@ -204,6 +204,45 @@ svg {
   text-underline-offset: 2px;
 }
 
+.design-screen [data-pencil-name="Hero Text"]:has(> [data-pencil-name="Summary CTAs"]) {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  column-gap: 10px !important;
+  row-gap: 18px !important;
+  align-items: stretch !important;
+}
+
+.design-screen [data-pencil-name="Hero Text"]:has(> [data-pencil-name="Summary CTAs"]) > [data-pencil-name="Label"],
+.design-screen [data-pencil-name="Hero Text"]:has(> [data-pencil-name="Summary CTAs"]) > [data-pencil-name="Hero Title"],
+.design-screen [data-pencil-name="Hero Text"]:has(> [data-pencil-name="Summary CTAs"]) > [data-pencil-name="Hero Copy"],
+.design-screen [data-pencil-name="Hero Text"]:has(> [data-pencil-name="Summary CTAs"]) > [data-pencil-name="Hero Meta"] {
+  grid-column: 1 / -1;
+}
+
+.design-screen [data-pencil-name="Hero Text"]:has(> [data-pencil-name="Summary CTAs"]) > [data-pencil-name="Summary CTAs"],
+.design-screen [data-pencil-name="Hero Text"]:has(> [data-pencil-name="Summary CTAs"]) > [data-pencil-name="Hero Actions"] {
+  display: contents !important;
+}
+
+.design-screen [data-pencil-name="Hero Text"]:has(> [data-pencil-name="Summary CTAs"]) > [data-pencil-name="Summary CTAs"] > [data-pencil-name^="CTA —"],
+.design-screen [data-pencil-name="Hero Text"]:has(> [data-pencil-name="Summary CTAs"]) > [data-pencil-name="Hero Actions"] > [data-pencil-name^="CTA —"] {
+  box-sizing: border-box;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: 100%;
+  min-height: 44px;
+  justify-content: center !important;
+  padding: 10px 12px !important;
+  text-align: center;
+}
+
+.design-screen [data-pencil-name="Hero Text"]:has(> [data-pencil-name="Summary CTAs"]) [data-pencil-name^="CTA —"] [data-pencil-name="Button Label"] {
+  min-width: 0;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+}
+
 .design-screen [role="button"][aria-pressed="true"] {
   background-color: #0f382b !important;
   color: #f9f8f6 !important;
@@ -1545,6 +1584,12 @@ svg {
   .weather-forecast-meta {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .design-screen .weather-forecast {
+    display: none !important;
   }
 }
 

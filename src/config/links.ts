@@ -1,0 +1,127 @@
+export type ActionDestination =
+  | { type: "route"; path: string }
+  | { type: "url"; url: string }
+  | { type: "action" };
+
+export const DEFAULT_ACTION_URL = "https://www.example.com/";
+export const BOOKING_URL = "https://www.example.com/";
+
+export const PRIMARY_NAVIGATION = [
+  { label: "Destinations", path: "/destinations" },
+  { label: "Itineraries", path: "/itinerary" },
+  { label: "Map & Guide", path: "/map" },
+  { label: "Food & Drinks", path: "/food" },
+  { label: "Logistics", path: "/logistics" },
+  { label: "About Me", path: "/about" },
+];
+
+export const ACTION_DESTINATIONS: Record<string, ActionDestination> = {
+  "Nav — Destinations": { type: "route", path: "/destinations" },
+  "Link — Destinations": { type: "route", path: "/destinations" },
+  "Link — Bangkok": { type: "route", path: "/destinations" },
+  "Link — Chiang Mai": { type: "route", path: "/destinations" },
+  "Link — Northern Trails": { type: "route", path: "/destinations" },
+  "Link — Phuket & Islands": { type: "route", path: "/destinations" },
+  "Footer Link — Destinations": { type: "route", path: "/destinations" },
+  "Nav — Itineraries": { type: "route", path: "/itinerary" },
+  "Link — Itineraries": { type: "route", path: "/itinerary" },
+  "Footer Link — Itineraries": { type: "route", path: "/itinerary" },
+  "Nav — Map & Guide": { type: "route", path: "/map" },
+  "Link — Map & Guide": { type: "route", path: "/map" },
+  "Footer Link — Map & Guide": { type: "route", path: "/map" },
+  "Nav — Food & Drinks": { type: "route", path: "/food" },
+  "Link — Food & Drinks": { type: "route", path: "/food" },
+  "Footer Link — Food & Drinks": { type: "route", path: "/food" },
+  "Nav — Logistics": { type: "route", path: "/logistics" },
+  "Link — Logistics": { type: "route", path: "/logistics" },
+  "Footer Link — Logistics": { type: "route", path: "/logistics" },
+  "Nav — About Me": { type: "route", path: "/about" },
+  "Link — About Me": { type: "route", path: "/about" },
+  "Footer Link — About Me": { type: "route", path: "/about" },
+  "Back Button": { type: "route", path: "/" },
+  "Back Link": { type: "route", path: "/itinerary" },
+  "CTA — Read the journal": { type: "route", path: "/" },
+  "CTA — Read the full journal": { type: "route", path: "/" },
+  "CTA — Read field notes": { type: "route", path: "/" },
+  "CTA — See all 23 dishes": { type: "route", path: "/food" },
+  "Link — Email Me": { type: "url", url: "mailto:hello@siamandsoul.co" },
+  "Email Button": { type: "url", url: "mailto:hello@siamandsoul.co" },
+  "Link — Instagram": { type: "url", url: "https://www.instagram.com/" },
+  "Link — Pinterest": { type: "url", url: "https://www.pinterest.com/" },
+  "Link — YouTube": { type: "url", url: "https://www.youtube.com/" },
+  "CTA — Book experience": { type: "url", url: BOOKING_URL },
+  "CTA — Book transfer": { type: "url", url: BOOKING_URL },
+  "CTA — Book night train": { type: "url", url: BOOKING_URL },
+  "CTA — Book ride": { type: "url", url: BOOKING_URL },
+  "CTA — Book stays": { type: "url", url: BOOKING_URL },
+  "CTA — Book the trip": { type: "url", url: BOOKING_URL },
+  "CTA — Book this trip": { type: "url", url: BOOKING_URL },
+  "CTA — Book tour": { type: "url", url: BOOKING_URL },
+  "CTA — Book": { type: "url", url: BOOKING_URL },
+  "CTA — Book a regional guide": { type: "url", url: BOOKING_URL },
+  "CTA — Book all stays": { type: "url", url: BOOKING_URL },
+  "CTA — Book the full route": { type: "url", url: BOOKING_URL },
+  "CTA — Get travel insurance": { type: "url", url: BOOKING_URL },
+  "CTA — Book a photo walk": { type: "url", url: BOOKING_URL },
+  "CTA — Book a food tour": { type: "url", url: BOOKING_URL },
+  "CTA — Book this itinerary": { type: "url", url: BOOKING_URL },
+  "CTA — Food tour": { type: "url", url: BOOKING_URL },
+  "CTA — Get transport pass": { type: "url", url: BOOKING_URL },
+  "CTA — Reserve": { type: "url", url: BOOKING_URL },
+  "CTA — Reserve table": { type: "url", url: BOOKING_URL },
+  "CTA — Book a November stay": { type: "url", url: BOOKING_URL },
+  "CTA — Book a history walk": { type: "url", url: BOOKING_URL },
+  "CTA — Book now": { type: "url", url: BOOKING_URL },
+  "CTA — Book the Pai transfer": { type: "url", url: BOOKING_URL },
+  "CTA — Book the whole route": { type: "url", url: BOOKING_URL },
+  "CTA — Book this route": { type: "url", url: BOOKING_URL },
+  "CTA — Book this stay": { type: "url", url: BOOKING_URL },
+  "CTA — Book stay": { type: "url", url: BOOKING_URL },
+  "CTA — Book a multi-region trip": { type: "url", url: BOOKING_URL },
+  "CTA — Get pass": { type: "url", url: BOOKING_URL },
+  "CTA — Download checklist": { type: "action" },
+  "CTA — Download expenses": { type: "action" },
+  "Download PDF Button": { type: "action" },
+  "Save Button": { type: "action" },
+  "Refresh Button": { type: "action" },
+  "Filter — All": { type: "action" },
+  "Filter — Bangkok": { type: "action" },
+  "Filter — Chiang Mai": { type: "action" },
+  "Filter — Northern Trails": { type: "action" },
+  "Filter — Phuket & Islands": { type: "action" },
+  "Tab — Dessert Spots": { type: "action" },
+  "Tab — Must-Try Dishes": { type: "action" },
+  "Tab — Rooftop Bars": { type: "action" },
+  "Tab — Street Snacks": { type: "action" },
+  "Vibe — Beach": { type: "action" },
+  "Vibe — Culture": { type: "action" },
+  "Vibe — Luxury": { type: "action" },
+  "Vibe — Nature": { type: "action" },
+  "Vibe — Street Food": { type: "action" },
+  "Budget — $": { type: "action" },
+  "Budget — $$": { type: "action" },
+  "Budget — $$$": { type: "action" },
+  "View Tab — Countrywide Map": { type: "action" },
+  "View Tab — Phuket & Andaman Coast": { type: "action" },
+  "Lightbox Close": { type: "action" },
+  "Lightbox Nav": { type: "action" },
+  "Zoom Button": { type: "action" },
+  "Close Button": { type: "action" },
+  "Close Story Button": { type: "action" },
+  "Review Card — BANGKOK": { type: "action" },
+  "Review Card — CHIANG MAI": { type: "action" },
+  "Review Card — KOH KOOD": { type: "action" },
+  "Review Card — KRABI": { type: "action" },
+  "Review Card — MAE HONG SON": { type: "action" },
+};
+
+export function getActionDestination(label: string): ActionDestination {
+  const configured = ACTION_DESTINATIONS[label];
+  if (configured) return configured;
+
+  if (/^CTA — (Book|Reserve|Food tour|Get pass|Get transport pass|Get travel insurance)/.test(label)) {
+    return { type: "url", url: BOOKING_URL };
+  }
+
+  return { type: "url", url: DEFAULT_ACTION_URL };
+}

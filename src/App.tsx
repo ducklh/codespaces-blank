@@ -7,6 +7,7 @@ import {
   type MouseEvent,
 } from "react";
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { DEFAULT_ACTION_URL, getActionDestination, PRIMARY_NAVIGATION } from "./config/links";
 import PageShell from "./pages/PageShell";
 
 const HomeSource = lazy(() => import("./pages/design/HomeSource"));
@@ -17,44 +18,6 @@ const FoodDrinksSource = lazy(() => import("./pages/design/FoodDrinksSource"));
 const TripLogisticsSource = lazy(() => import("./pages/design/TripLogisticsSource"));
 const InteractiveMapSource = lazy(() => import("./pages/design/InteractiveMapSource"));
 const ReviewReaderSource = lazy(() => import("./pages/design/ReviewReaderSource"));
-
-const BOOKING_URL = "https://www.example.com/";
-
-const primaryNavigation = [
-  { label: "Destinations", path: "/destinations" },
-  { label: "Itineraries", path: "/itinerary" },
-  { label: "Map & Guide", path: "/map" },
-  { label: "Food & Drinks", path: "/food" },
-  { label: "Logistics", path: "/logistics" },
-  { label: "About Me", path: "/about" },
-];
-
-const routesByLabel: Record<string, string> = {
-  "Nav — Destinations": "/destinations",
-  "Link — Destinations": "/destinations",
-  "Link — Bangkok": "/destinations",
-  "Link — Chiang Mai": "/destinations",
-  "Link — Northern Trails": "/destinations",
-  "Link — Phuket & Islands": "/destinations",
-  "Footer Link — Destinations": "/destinations",
-  "Nav — Itineraries": "/itinerary",
-  "Link — Itineraries": "/itinerary",
-  "Footer Link — Itineraries": "/itinerary",
-  "Nav — Map & Guide": "/map",
-  "Link — Map & Guide": "/map",
-  "Footer Link — Map & Guide": "/map",
-  "Nav — Food & Drinks": "/food",
-  "Link — Food & Drinks": "/food",
-  "Footer Link — Food & Drinks": "/food",
-  "Nav — Logistics": "/logistics",
-  "Link — Logistics": "/logistics",
-  "Footer Link — Logistics": "/logistics",
-  "Nav — About Me": "/about",
-  "Link — About Me": "/about",
-  "Footer Link — About Me": "/about",
-  "Back Button": "/",
-  "Back Link": "/itinerary",
-};
 
 function selectAction(group: Element, action: HTMLElement, allowClear = false) {
   const controls = group.querySelectorAll<HTMLElement>('[role="button"]');
@@ -166,7 +129,7 @@ function Website() {
   const [pendingScroll, setPendingScroll] = useState<string | null>(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const currentNavigationLabel =
-    primaryNavigation.find(({ path }) => path === location.pathname)?.label ?? "Explore";
+    PRIMARY_NAVIGATION.find(({ path }) => path === location.pathname)?.label ?? "Explore";
 
   useEffect(() => {
     setMobileNavOpen(false);
@@ -178,8 +141,8 @@ function Website() {
 
     const updateCurrentLink = () => {
       main.querySelectorAll<HTMLElement>(".design-screen [role='link']").forEach((link) => {
-        const route = routesByLabel[link.dataset.pencilName ?? ""];
-        if (route === location.pathname) {
+        const destination = getActionDestination(link.dataset.pencilName ?? "");
+        if (destination.type === "route" && destination.path === location.pathname) {
           link.setAttribute("aria-current", "page");
         } else {
           link.removeAttribute("aria-current");
@@ -260,49 +223,47 @@ function Website() {
     if (!action) return;
 
     const label = action.dataset.pencilName ?? "";
-    const route = routesByLabel[label];
-    if (route) {
+    const destination = getActionDestination(label);
+    const redirectToDestination = () => {
       setReviewOpen(false);
-      navigate(route);
+      window.location.assign(
+        destination.type === "url" ? destination.url : DEFAULT_ACTION_URL,
+      );
+    };
+    if (destination.type === "route") {
+      setReviewOpen(false);
+      if (label === "CTA — Read the journal" || label === "CTA — Read the full journal") {
+        setPendingScroll(label.includes("full journal") ? "Long Read" : "Journal Feed");
+      } else if (label === "CTA — See all 23 dishes") {
+        setPendingScroll("Food Grid");
+      }
+      navigate(destination.path);
       window.scrollTo({ top: 0 });
       return;
     }
 
-    if (label === "Link — Email Me") {
-      window.location.href = "mailto:hello@siamandsoul.co";
-      return;
-    }
-
-    if (label === "Email Button") {
-      window.location.href = "mailto:hello@siamandsoul.co";
-      return;
-    }
-
     if (/^CTA — (Book|Reserve|Food tour|Get pass|Get transport pass|Get travel insurance)/.test(label)) {
-      setReviewOpen(false);
-      window.location.assign(BOOKING_URL);
-      return;
-    }
-
-    if (label.startsWith("CTA — Read")) {
-      setPendingScroll(label.includes("full journal") ? "Long Read" : "Journal Feed");
-      if (location.pathname !== "/") navigate("/");
-      return;
-    }
-
-    if (label === "CTA — See all 23 dishes") {
-      setPendingScroll("Food Grid");
-      if (location.pathname !== "/food") navigate("/food");
+      redirectToDestination();
       return;
     }
 
     if (label === "CTA — Download checklist") {
-      downloadText(sourceText("Packing Section"), "thailand-packing-checklist.txt");
+      const content = sourceText("Packing Section");
+      if (!content) {
+        redirectToDestination();
+        return;
+      }
+      downloadText(content, "thailand-packing-checklist.txt");
       return;
     }
 
     if (label === "CTA — Download expenses") {
-      downloadText(sourceText("Dashboard Card"), "thailand-trip-expenses.txt");
+      const content = sourceText("Dashboard Card");
+      if (!content) {
+        redirectToDestination();
+        return;
+      }
+      downloadText(content, "thailand-trip-expenses.txt");
       return;
     }
 
@@ -319,7 +280,10 @@ function Website() {
     if (label.startsWith("Filter —")) {
       const group = action.closest('[data-pencil-name="Pills"]');
       const page = action.closest(".design-screen");
-      if (!group || !page) return;
+      if (!group || !page) {
+        redirectToDestination();
+        return;
+      }
 
       const selected = selectAction(group, action);
       const filter = selected?.dataset.pencilName?.replace("Filter — ", "") ?? "All";
@@ -354,7 +318,10 @@ function Website() {
     if (label.startsWith("Tab —")) {
       const group = action.closest('[data-pencil-name="Tabs"]');
       const page = action.closest(".design-screen");
-      if (!group || !page) return;
+      if (!group || !page) {
+        redirectToDestination();
+        return;
+      }
 
       const selected = selectAction(group, action);
       const category = selected?.dataset.pencilName?.replace("Tab — ", "").toUpperCase();
@@ -371,7 +338,10 @@ function Website() {
           ? '[data-pencil-name="Vibe Filters"]'
           : '[data-pencil-name="Budget Filters"]',
       );
-      if (!page || !group) return;
+      if (!page || !group) {
+        redirectToDestination();
+        return;
+      }
 
       selectAction(group, action, true);
       const activeVibe = page.querySelector<HTMLElement>(
@@ -400,7 +370,10 @@ function Website() {
 
     if (label.startsWith("View Tab —")) {
       const group = action.closest('[data-pencil-name="View Toggle Dock"]');
-      if (!group) return;
+      if (!group) {
+        redirectToDestination();
+        return;
+      }
       selectAction(group, action);
       const section = label.includes("Countrywide Map") ? "Map 01 Section" : "Map 02 Section";
       document
@@ -416,17 +389,27 @@ function Website() {
 
     if (label === "Lightbox Close") {
       const preview = action.closest<HTMLElement>('[data-pencil-name="Lightbox Preview"]');
-      if (preview) preview.hidden = true;
+      if (preview) {
+        preview.hidden = true;
+      } else {
+        redirectToDestination();
+      }
       return;
     }
 
     if (label === "Lightbox Nav") {
       const preview = action.closest<HTMLElement>('[data-pencil-name="Lightbox Preview"]');
       const page = action.closest<HTMLElement>(".design-screen");
-      if (!preview || !page) return;
+      if (!preview || !page) {
+        redirectToDestination();
+        return;
+      }
 
       const images = galleryImages(page);
-      if (!images.length) return;
+      if (!images.length) {
+        redirectToDestination();
+        return;
+      }
       const navButtons = Array.from(preview.querySelectorAll('[data-pencil-name="Lightbox Nav"]'));
       const direction = navButtons.indexOf(action) === 0 ? -1 : 1;
       const currentIndex = currentGalleryIndex(page, preview);
@@ -448,7 +431,10 @@ function Website() {
     if (label === "Zoom Button") {
       const imageWrap = action.closest<HTMLElement>('[data-pencil-name="Image Wrap"]');
       const page = action.closest<HTMLElement>(".design-screen");
-      if (!imageWrap || !page) return;
+      if (!imageWrap || !page) {
+        redirectToDestination();
+        return;
+      }
 
       const clickedImage = imageWrap.querySelector<HTMLElement>(
         '[data-pencil-name^="IMAGE [USER_PHOTO_GALLERY_"]',
@@ -467,8 +453,13 @@ function Website() {
         : undefined;
       if (asset && new URL(asset, window.location.href).pathname.startsWith("/assets/")) {
         window.open(asset, "_blank", "noopener,noreferrer");
+      } else {
+        redirectToDestination();
       }
+      return;
     }
+
+    redirectToDestination();
   };
 
   const onClick = (event: MouseEvent<HTMLElement>) => handleAction(event.target);
@@ -509,7 +500,7 @@ function Website() {
           </button>
         </div>
         <div className="mobile-site-nav-list" id="mobile-site-nav-list">
-          {primaryNavigation.map(({ label, path }) => (
+          {PRIMARY_NAVIGATION.map(({ label, path }) => (
             <Link
               key={path}
               className="mobile-site-nav-link"
