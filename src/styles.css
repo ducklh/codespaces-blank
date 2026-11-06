@@ -48,6 +48,16 @@ svg {
   margin: 0 !important;
 }
 
+.design-screen [data-pencil-name="Logo"] {
+  cursor: pointer;
+}
+
+.design-screen [data-pencil-name="Logo"]:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid #d99b26;
+  outline-offset: 4px;
+}
+
 .design-screen .weather-forecast {
   box-sizing: border-box;
   width: calc(100% - 144px);
@@ -309,6 +319,52 @@ svg {
   display: none;
 }
 
+.back-to-top {
+  position: fixed;
+  z-index: 1200;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: max(24px, env(safe-area-inset-bottom));
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid #0f382b;
+  border-radius: 50%;
+  background: #0f382b;
+  box-shadow: 0 6px 20px #1a1a1a26;
+  color: #f9f8f6;
+  cursor: pointer;
+  animation: back-to-top-appear 160ms ease-out both;
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background: #174b3a;
+  outline: 2px solid #d99b26;
+  outline-offset: 3px;
+}
+
+.back-to-top svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+@keyframes back-to-top-appear {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .page-shell .design-screen [data-pencil-name="Top Ribbon"] {
   display: none !important;
 }
@@ -408,15 +464,6 @@ svg {
 
 .design-screen [data-pencil-name="Search Bar"] {
   display: none !important;
-}
-
-.page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Filter Button"] {
-  box-sizing: border-box;
-  width: 44px !important;
-  min-width: 44px !important;
-  height: 44px !important;
-  min-height: 44px !important;
-  flex: 0 0 44px !important;
 }
 
 .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Map 01 Section"],
@@ -1650,6 +1697,33 @@ svg {
 
 .page-shell[data-mobile="true"] .design-screen .weather-forecast {
   display: none !important;
+}
+
+@media (max-width: 600px) {
+  .page-shell[data-responsive="reflow"] .design-screen[data-pencil-name="Siam & Soul — Home"] [data-pencil-name="Rain Chart"] {
+    grid-template-columns: repeat(12, minmax(17px, 1fr));
+    gap: 2px !important;
+    overflow: visible;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen[data-pencil-name="Siam & Soul — Home"] [data-pencil-name^="Month —"] [data-pencil-name="Month"],
+  .page-shell[data-responsive="reflow"] .design-screen[data-pencil-name="Siam & Soul — Home"] [data-pencil-name^="Month —"] [data-pencil-name="Temp"] {
+    width: max-content !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: keep-all !important;
+    hyphens: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen[data-pencil-name="Siam & Soul — Home"] [data-pencil-name^="Month —"] [data-pencil-name="Month"] {
+    font-size: 8px !important;
+    letter-spacing: 0.2px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen[data-pencil-name="Siam & Soul — Home"] [data-pencil-name^="Month —"] [data-pencil-name="Temp"] {
+    font-size: 9px !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

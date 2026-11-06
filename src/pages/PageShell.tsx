@@ -30,6 +30,8 @@ export default function PageShell({ children }: { children: ReactNode }) {
       frame.querySelectorAll<HTMLElement>("[class]").forEach((element) => {
         const classNames = element.getAttribute("class") ?? "";
         const isPhoto = element.dataset.pencilName?.startsWith("IMAGE [USER_PHOTO_") ?? false;
+        const isHistoryPhoto =
+          element.dataset.pencilName === "IMAGE [USER_PHOTO_EXPANDED_AYUTTHAYA]";
         const photoWidth = classNames.match(/(?:^|\s)w-\[(\d+(?:\.\d+)?)px\]/);
         const photoHeight = classNames.match(/(?:^|\s)h-\[(\d+(?:\.\d+)?)px\]/);
         const fontMatch = classNames.match(/(?:^|\s)text-\[(\d+(?:\.\d+)?)px\]/);
@@ -74,11 +76,16 @@ export default function PageShell({ children }: { children: ReactNode }) {
               : "row";
             responsiveValues.set("flex", parentDirection === "row" ? "0 0 100%" : "0 0 auto");
             if (photoWidth) {
-              responsiveValues.set("height", "auto");
-              responsiveValues.set(
-                "aspect-ratio",
-                `${Number(photoWidth[1])} / ${Number(photoHeight[1])}`,
-              );
+              if (isHistoryPhoto) {
+                responsiveValues.set("height", "clamp(220px, 70vw, 320px)");
+                responsiveValues.set("aspect-ratio", "auto");
+              } else {
+                responsiveValues.set("height", "auto");
+                responsiveValues.set(
+                  "aspect-ratio",
+                  `${Number(photoWidth[1])} / ${Number(photoHeight[1])}`,
+                );
+              }
             } else {
               responsiveValues.set(
                 "height",

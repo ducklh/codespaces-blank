@@ -128,12 +128,52 @@ function Website() {
   const [reviewOpen, setReviewOpen] = useState(false);
   const [pendingScroll, setPendingScroll] = useState<string | null>(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [backToTopVisible, setBackToTopVisible] = useState(false);
   const currentNavigationLabel =
     PRIMARY_NAVIGATION.find(({ path }) => path === location.pathname)?.label ?? "Explore";
 
   useEffect(() => {
     setMobileNavOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    const main = document.querySelector("main");
+    if (!main) return;
+
+    const makeLogosAccessible = () => {
+      main.querySelectorAll<HTMLElement>('.design-screen [data-pencil-name="Logo"]').forEach((logo) => {
+        logo.setAttribute("role", "link");
+        logo.setAttribute("tabindex", "0");
+        logo.setAttribute("aria-label", "Go to homepage");
+      });
+    };
+
+    makeLogosAccessible();
+    const observer = new MutationObserver(makeLogosAccessible);
+    observer.observe(main, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    let hideTimer: number | undefined;
+    const onScroll = () => {
+      if (window.scrollY <= 240) {
+        setBackToTopVisible(false);
+        window.clearTimeout(hideTimer);
+        return;
+      }
+
+      setBackToTopVisible(true);
+      window.clearTimeout(hideTimer);
+      hideTimer = window.setTimeout(() => setBackToTopVisible(false), 1800);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.clearTimeout(hideTimer);
+    };
+  }, []);
 
   useEffect(() => {
     const main = document.querySelector("main");
@@ -462,9 +502,30 @@ function Website() {
     redirectToDestination();
   };
 
-  const onClick = (event: MouseEvent<HTMLElement>) => handleAction(event.target);
+  const onClick = (event: MouseEvent<HTMLElement>) => {
+    if (
+      event.target instanceof Element &&
+      event.target.closest('.design-screen [data-pencil-name="Logo"]')
+    ) {
+      setReviewOpen(false);
+      navigate("/");
+      window.scrollTo({ top: 0 });
+      return;
+    }
+    handleAction(event.target);
+  };
   const onKeyDown = (event: ReactKeyboardEvent<HTMLElement>) => {
     if (event.key !== "Enter" && event.key !== " ") return;
+    if (
+      event.target instanceof Element &&
+      event.target.closest('.design-screen [data-pencil-name="Logo"]')
+    ) {
+      event.preventDefault();
+      setReviewOpen(false);
+      navigate("/");
+      window.scrollTo({ top: 0 });
+      return;
+    }
     const action = findSourceAction(event.target);
     if (action?.getAttribute("role")) {
       event.preventDefault();
@@ -525,6 +586,18 @@ function Website() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
+      {backToTopVisible && (
+        <button
+          className="back-to-top"
+          type="button"
+          aria-label="Back to top"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="m6 14 6-6 6 6" />
+          </svg>
+        </button>
+      )}
       {reviewOpen && (
         <div
           className="review-modal"
