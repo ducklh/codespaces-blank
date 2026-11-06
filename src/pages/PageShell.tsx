@@ -5,9 +5,20 @@ const REFLOW_BREAKPOINT = 1200;
 
 type InlineStyle = Map<string, { value: string; priority: string }>;
 
+function getInitialDimensions() {
+  const availableWidth = document.documentElement.clientWidth || window.innerWidth;
+  const reflow = availableWidth <= REFLOW_BREAKPOINT;
+
+  return {
+    scale: reflow ? 1 : Math.min(1, availableWidth / DESIGN_WIDTH),
+    height: 0,
+    reflow,
+  };
+}
+
 export default function PageShell({ children }: { children: ReactNode }) {
   const frameRef = useRef<HTMLDivElement>(null);
-  const [dimensions, setDimensions] = useState({ scale: 1, height: 0, reflow: false });
+  const [dimensions, setDimensions] = useState(getInitialDimensions);
 
   useLayoutEffect(() => {
     const frame = frameRef.current;

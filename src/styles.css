@@ -55,6 +55,26 @@ svg {
   outline-offset: 1px;
 }
 
+.design-screen [role="button"][aria-pressed="true"] * {
+  color: #f9f8f6 !important;
+}
+
+.design-screen [data-selection-updated="true"] [role="button"][aria-pressed="false"] {
+  background-color: transparent !important;
+  color: #0f382b !important;
+  outline-color: #e3e0d9 !important;
+  box-shadow: none !important;
+}
+
+.design-screen [data-selection-updated="true"] [role="button"][aria-pressed="false"] * {
+  color: #0f382b !important;
+}
+
+.design-screen [data-pencil-name="Vibe Filters"][data-selection-updated="true"] [role="button"][aria-pressed="false"] {
+  background-color: #efebe3 !important;
+  outline: none !important;
+}
+
 .design-screen [role="link"],
 .design-screen [role="button"] {
   cursor: pointer;

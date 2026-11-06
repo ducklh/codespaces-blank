@@ -64,6 +64,7 @@ function selectAction(group: Element, action: HTMLElement, allowClear = false) {
   controls.forEach((control) => {
     control.setAttribute("aria-pressed", String(control === selected));
   });
+  group.setAttribute("data-selection-updated", "true");
   return selected;
 }
 
