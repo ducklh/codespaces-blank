@@ -3,14 +3,17 @@
 html,
 body,
 #root {
+  width: 100%;
   min-height: 100%;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   line-height: normal;
   background: #f9f8f6;
+  overflow-x: clip;
 }
 
 svg {
@@ -140,9 +143,11 @@ svg {
 }
 
 .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name] {
+  min-width: 0 !important;
   white-space: normal !important;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
   word-break: normal;
+  hyphens: auto;
 }
 
 .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="IMAGE [USER_PHOTO_"].absolute {
@@ -233,6 +238,7 @@ svg {
 .review-modal-frame {
   width: min(100vw, 1440px);
   min-height: 100vh;
+  min-height: 100dvh;
   flex: 0 0 min(100vw, 1440px);
 }
 
@@ -282,8 +288,8 @@ svg {
   }
 
   .review-modal .review-modal-frame .page-shell[data-responsive="reflow"] .design-review-screen [data-pencil-name="Close Button"] {
-    top: 16px !important;
-    right: 16px !important;
+    top: max(16px, env(safe-area-inset-top)) !important;
+    right: max(16px, env(safe-area-inset-right)) !important;
     left: auto !important;
     width: 44px !important;
     height: 44px !important;
@@ -305,6 +311,7 @@ svg {
 
   .mobile-site-nav-list {
     display: flex;
+    box-sizing: border-box;
     width: 100%;
     gap: 8px;
     overflow-x: auto;
@@ -544,6 +551,220 @@ svg {
     max-width: 100% !important;
     flex: none !important;
   }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Transport Section"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Accommodation and Hacks"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Converter and ATM"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 16px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Transport Card"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Accommodation Card"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Hacks Card"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Currency Converter"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="ATM Advice"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Transport Head"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    padding: 18px 16px 14px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Transport Head Text"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Transport Title"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Transport Sub"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header"] {
+    display: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 16px !important;
+    align-items: start !important;
+    padding: 16px !important;
+    border-top: 1px solid #e3e0d9;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="Mode Cell"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="Fare"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="Best For"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="My Take"] {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: none !important;
+    text-align: left !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="Mode Cell"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="My Take"] {
+    grid-column: 1 / -1;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="Mode Cell"] {
+    gap: 10px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="Fare"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="Best For"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="My Take"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="Fare"]::before {
+    content: "AVG FARE";
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="Best For"]::before {
+    content: "BEST FOR";
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="My Take"]::before {
+    content: "MY TAKE";
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="Fare"]::before,
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="Best For"]::before,
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name="My Take"]::before {
+    color: #6b6a65;
+    font: 600 9px/1.3 "Plus Jakarta Sans", system-ui, sans-serif;
+    letter-spacing: 0.6px;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Transport Row —"] [data-pencil-name^="CTA —"] {
+    grid-column: 1 / -1;
+    justify-self: start;
+    min-height: 44px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Transport Card"] [data-pencil-name="Row Divider"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Accommodation Card"] [data-pencil-name="Row Divider"] {
+    display: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Accommodation Head"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 12px !important;
+    align-items: center !important;
+    padding: 18px 16px 14px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Accommodation Title"] {
+    grid-column: 1 / -1;
+    width: 100% !important;
+    white-space: normal !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Accommodation Head"] [data-pencil-name="CTA — Book stays"] {
+    min-height: 44px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Accommodation Header Row"] {
+    display: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 16px !important;
+    align-items: start !important;
+    padding: 14px 16px !important;
+    border-top: 1px solid #e3e0d9;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Place"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Nights"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Per Night"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Total"] {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: none !important;
+    text-align: left !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Place"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Total"] {
+    grid-column: 1 / -1;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Nights"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Per Night"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Total"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Nights"]::before {
+    content: "NIGHTS";
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Per Night"]::before {
+    content: "PER NIGHT";
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Total"]::before {
+    content: "TOTAL";
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Nights"]::before,
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Per Night"]::before,
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Stay —"] [data-pencil-name="Total"]::before {
+    color: #6b6a65;
+    font: 600 9px/1.3 "Plus Jakarta Sans", system-ui, sans-serif;
+    letter-spacing: 0.6px;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Accommodation Total"] {
+    padding-inline: 16px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Logistics Band Inner"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 16px !important;
+    padding: 18px 16px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Band Copy"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Band CTAs"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Band CTAs"] [data-pencil-name^="CTA —"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    justify-content: center !important;
+  }
 }
 
 @media (max-width: 600px) {
@@ -689,15 +910,161 @@ svg {
     grid-column: 3;
     grid-row: 1;
     align-self: center;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [role="button"],
+  .page-shell[data-responsive="reflow"] .design-screen [role="link"] {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="CTA —"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Lightbox Close"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Lightbox Nav"] {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Table Card"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Table Head"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    padding: 20px 16px 16px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Head Text"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Table Title"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Table Note"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"] {
+    display: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 16px !important;
+    align-items: start !important;
+    padding: 16px !important;
+    border-top: 1px solid #e3e0d9;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Region"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Best Months"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Avg High"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Rain"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Crowds"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Verdict"] {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: none !important;
+    text-align: left !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Region"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Verdict"] {
+    grid-column: 1 / -1;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Region"] {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Best Months"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Avg High"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Rain"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Crowds"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Verdict"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Best Months"]::before {
+    content: "BEST MONTHS";
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Avg High"]::before {
+    content: "AVG HIGH";
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Rain"]::before {
+    content: "RAIN";
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Crowds"]::before {
+    content: "CROWDS";
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Verdict"]::before {
+    content: "VERDICT";
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Best Months"]::before,
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Avg High"]::before,
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Rain"]::before,
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Crowds"]::before,
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Verdict"]::before {
+    color: #6b6a65;
+    font: 600 9px/1.3 "Plus Jakarta Sans", system-ui, sans-serif;
+    letter-spacing: 0.6px;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Row Divider"] {
+    display: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Packing Footer Inner"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 16px !important;
+    padding: 16px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Packing Footer Inner"] [data-pencil-name="Footer Note"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Footer CTAs"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Footer CTAs"] [data-pencil-name^="CTA —"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    justify-content: center !important;
   }
 
   .mobile-site-nav-bar {
     display: flex;
+    box-sizing: border-box;
     min-height: 52px;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 6px max(16px, env(safe-area-inset-left));
+    padding: 6px max(16px, env(safe-area-inset-right)) 6px max(16px, env(safe-area-inset-left));
   }
 
   .mobile-site-nav-current {
@@ -710,7 +1077,7 @@ svg {
 
   .mobile-site-nav-toggle {
     display: inline-flex;
-    min-height: 40px;
+    min-height: 44px;
     flex: 0 0 auto;
     align-items: center;
     justify-content: center;

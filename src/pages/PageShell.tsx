@@ -78,12 +78,20 @@ export default function PageShell({ children }: { children: ReactNode }) {
 
         if (fontMatch) {
           const sourceFontSize = Number(fontMatch[1]);
-          const minimumFontSize = sourceFontSize <= 12 ? 12 : 14;
-          const fontSize = Math.max(minimumFontSize, sourceFontSize * scale);
-          responsiveValues.set("font-size", `${fontSize}px`);
+          const minimumFontSize =
+            sourceFontSize <= 12 ? 12 : sourceFontSize >= 32 ? 22 : sourceFontSize >= 22 ? 16 : 14;
+          const preferredFontSize = `${((sourceFontSize / DESIGN_WIDTH) * 100).toFixed(4)}vw`;
+          const sourceLineHeight = Number(lineHeightMatch?.[1] ?? sourceFontSize);
+          const minimumLineHeight = Math.ceil(minimumFontSize * 1.35);
+          const maximumLineHeight = Math.max(sourceLineHeight, minimumLineHeight);
+          const preferredLineHeight = `${((sourceLineHeight / DESIGN_WIDTH) * 100).toFixed(4)}vw`;
+          responsiveValues.set(
+            "font-size",
+            `clamp(${minimumFontSize}px, ${preferredFontSize}, ${sourceFontSize}px)`,
+          );
           responsiveValues.set(
             "line-height",
-            `${Math.max(fontSize * 1.35, Number(lineHeightMatch?.[1] ?? fontSize) * scale)}px`,
+            `clamp(${minimumLineHeight}px, ${preferredLineHeight}, ${maximumLineHeight}px)`,
           );
           if (trackingMatch) {
             responsiveValues.set("letter-spacing", `${Number(trackingMatch[1]) * scale}px`);
@@ -94,7 +102,7 @@ export default function PageShell({ children }: { children: ReactNode }) {
           const match = className.match(/^(p|px|py|pt|pr|pb|pl|m|mx|my|mt|mr|mb|ml|gap|gap-x|gap-y)-\[([^\]]+)\]$/);
           if (!match) return;
           const [, utility, values] = match;
-          const minimum = utility.startsWith("gap") ? 8 : utility.startsWith("p") ? 8 : 4;
+          const minimum = utility.startsWith("gap") ? 8 : utility.startsWith("p") ? 12 : 4;
           const scaledValues = values.split("_").map((value) =>
             value.replace(/-?\d+(?:\.\d+)?px/g, (length) => {
               const scaled = Number.parseFloat(length) * scale;
