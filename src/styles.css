@@ -191,9 +191,17 @@ svg {
   display: none;
 }
 
-.page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Search Bar"] {
-  max-width: calc(100vw - 88px) !important;
-  flex: 1 1 200px !important;
+.design-screen [data-pencil-name="Search Bar"] {
+  display: none !important;
+}
+
+.page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Filter Button"] {
+  box-sizing: border-box;
+  width: 44px !important;
+  min-width: 44px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  flex: 0 0 44px !important;
 }
 
 .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Map 01 Section"],
@@ -1339,117 +1347,5 @@ svg {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
-  }
-}
-
-@media (max-width: 800px) {
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Region Weather"] {
-    display: block !important;
-    width: 100% !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    padding: 32px 16px 0 !important;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Table Card"] {
-    width: 680px !important;
-    min-width: 680px !important;
-    max-width: none !important;
-    flex: none !important;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Table Head"] {
-    flex-direction: row !important;
-    align-items: flex-end !important;
-    padding: 16px 14px 12px !important;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Head Text"] {
-    width: auto !important;
-    max-width: none !important;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Table Title"] {
-    white-space: nowrap !important;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Table Note"] {
-    width: auto !important;
-    max-width: none !important;
-    white-space: nowrap !important;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"],
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] {
-    display: flex !important;
-    width: 680px !important;
-    min-width: 680px !important;
-    flex-flow: row nowrap !important;
-    align-items: center !important;
-    padding-inline: 14px !important;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] {
-    padding-block: 12px !important;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"] [data-pencil-name="Column — REGION"],
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Region"] {
-    width: 90px !important;
-    flex: 0 0 90px !important;
-    text-align: left !important;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"] [data-pencil-name="Column — BEST MONTHS"],
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Best Months"] {
-    width: 112px !important;
-    flex: 0 0 112px !important;
-    text-align: left !important;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"] [data-pencil-name="Column — AVG HIGH"],
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Avg High"] {
-    width: 76px !important;
-    flex: 0 0 76px !important;
-    text-align: left !important;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"] [data-pencil-name="Column — RAIN"],
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Rain"] {
-    width: 64px !important;
-    flex: 0 0 64px !important;
-    text-align: left !important;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"] [data-pencil-name="Column — CROWDS"],
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Crowds"] {
-    width: 84px !important;
-    flex: 0 0 84px !important;
-    text-align: left !important;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"] [data-pencil-name="Column — VERDICT"],
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Verdict"] {
-    width: 210px !important;
-    flex: 0 0 210px !important;
-    text-align: left !important;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Best Months"]::before,
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Avg High"]::before,
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Rain"]::before,
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Crowds"]::before,
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Verdict"]::before {
-    content: none !important;
-  }
-
-  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Footer"] {
-    width: 680px !important;
-    min-width: 680px !important;
-    flex-wrap: nowrap !important;
-    padding-inline: 14px !important;
   }
 }
