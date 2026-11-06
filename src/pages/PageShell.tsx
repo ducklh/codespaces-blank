@@ -149,7 +149,7 @@ export default function PageShell({ children }: { children: ReactNode }) {
       const reflow = availableWidth <= REFLOW_BREAKPOINT;
       const scale = Math.min(1, (availableWidth + 100) / DESIGN_WIDTH);
       updateResponsiveStyles(reflow, scale);
-      const layoutScale = reflow ? 1 : Math.min(1, availableWidth / DESIGN_WIDTH);
+      const layoutScale = reflow ? 1 : availableWidth / DESIGN_WIDTH;
       setDimensions({
         scale: layoutScale,
         height: Math.ceil(frame.scrollHeight * layoutScale),

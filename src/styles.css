@@ -24,9 +24,14 @@ svg {
 .page-shell {
   position: relative;
   width: 100%;
-  max-width: 1440px;
-  margin-inline: auto;
   overflow: hidden;
+}
+
+@media (min-width: 1201px) {
+  .page-shell {
+    width: calc(100% - clamp(32px, 4vw, 64px));
+    margin-inline: auto;
+  }
 }
 
 .page-frame {
@@ -193,8 +198,8 @@ svg {
 
 .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Map 01 Section"],
 .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Map 02 Section"] {
-  overflow-x: auto !important;
-  overscroll-behavior-x: contain;
+  position: relative !important;
+  overflow: visible !important;
 }
 
 .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Map 01 — Countrywide"],
@@ -203,6 +208,107 @@ svg {
   min-width: 1296px !important;
   max-width: none !important;
   flex: 0 0 1296px !important;
+}
+
+.page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Map 01 Section"] > [data-pencil-name="Map 01 Detail Card"],
+.page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Map 02 Section"] > [data-pencil-name="Map 02 Detail Card"] {
+  position: relative !important;
+  inset: auto !important;
+  align-self: stretch !important;
+  margin: 20px 0 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  flex: none !important;
+}
+
+@media (min-width: 1201px) {
+  .design-screen[data-pencil-name="Siam & Soul — Destinations"] [data-pencil-name="Destination Grid"] {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start !important;
+    gap: 36px 32px !important;
+  }
+
+  .design-screen[data-pencil-name="Siam & Soul — Destinations"] [data-pencil-name="Destination Grid"] > [data-pencil-name^="Column"] {
+    display: contents !important;
+  }
+
+  .design-screen[data-pencil-name="Siam & Soul — Destinations"] [data-pencil-name^="Destination —"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    flex: none !important;
+  }
+
+  .design-screen[data-pencil-name="Siam & Soul — Destinations"] [data-pencil-name^="Destination —"] > [data-pencil-name="Image Wrap"] {
+    height: clamp(240px, 20vw, 300px) !important;
+  }
+}
+
+.map-zoom-controls {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .page-shell[data-responsive="reflow"] .design-screen .map-zoom-controls {
+    position: absolute;
+    z-index: 5;
+    top: 8px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    padding: 4px;
+    border: 1px solid #e3e0d9;
+    border-radius: 999px;
+    background: #f9f8f6e8;
+    box-shadow: 0 2px 8px #1a1a1a1a;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen .map-zoom-viewport {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    isolation: isolate;
+    touch-action: none;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen .map-zoom-viewport > [data-pencil-name="Map 01 — Countrywide"],
+  .page-shell[data-responsive="reflow"] .design-screen .map-zoom-viewport > [data-pencil-name="Map 02 — Andaman Coast"] {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen .map-zoom-button {
+    display: inline-flex;
+    min-width: 32px;
+    min-height: 32px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+    border: 0;
+    border-radius: 999px;
+    background: #fff;
+    color: #0f382b;
+    font: 600 16px/1 "Plus Jakarta Sans", system-ui, sans-serif;
+    cursor: pointer;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen .map-zoom-button:disabled {
+    color: #9c9a94;
+    cursor: not-allowed;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen .map-zoom-reset {
+    min-width: 44px;
+    font-size: 11px;
+  }
 }
 
 @media (max-width: 600px) {
