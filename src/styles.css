@@ -222,6 +222,107 @@ svg {
   flex: none !important;
 }
 
+.design-screen [data-pencil-name="View Toggle Dock"] {
+  display: none !important;
+}
+
+.design-screen [data-pencil-name="View Toggle Dock"] > [data-pencil-name^="View Tab —"] {
+  box-sizing: border-box;
+  width: 100% !important;
+  min-width: 0 !important;
+  flex: none !important;
+  justify-content: center !important;
+  flex-wrap: nowrap !important;
+  gap: 10px !important;
+  min-height: 58px !important;
+  padding: 10px 16px !important;
+  border: 1px solid #ddd8ce;
+  border-radius: 999px;
+  background: #fffdfa !important;
+  box-shadow: 0 3px 10px #1a1a1a0a;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.design-screen [data-pencil-name="View Toggle Dock"] > [data-pencil-name^="View Tab —"] [data-pencil-name="Tab Label"] {
+  color: #0f382b !important;
+  flex: 0 1 auto;
+  line-height: 1.25;
+}
+
+.design-screen [data-pencil-name="View Toggle Dock"] > [data-pencil-name^="View Tab —"] [data-pencil-name="Tab Icon"] {
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+}
+
+.design-screen [data-pencil-name="View Toggle Dock"] > [data-pencil-name^="View Tab —"] [data-pencil-name="Tab Count"] {
+  flex: 0 0 auto;
+  min-width: 28px;
+  min-height: 28px;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 7px !important;
+}
+
+.design-screen [data-pencil-name="View Toggle Dock"] > [data-pencil-name^="View Tab —"] [data-pencil-name="Tab Icon"] path {
+  fill: #0f382b !important;
+}
+
+.design-screen [data-pencil-name="View Toggle Dock"] > [data-pencil-name^="View Tab —"] [data-pencil-name="Tab Count"] [data-pencil-name="Count"] {
+  color: #6b6a65 !important;
+}
+
+.design-screen [data-pencil-name="View Toggle Dock"] > [data-pencil-name^="View Tab —"]:hover {
+  border-color: #0f382b;
+  box-shadow: 0 5px 14px #0f382b18;
+  transform: translateY(-1px);
+}
+
+.design-screen [data-pencil-name="View Toggle Dock"] > [data-pencil-name^="View Tab —"][aria-pressed="true"] {
+  background: #0f382b !important;
+  border-color: #0f382b;
+  box-shadow: 0 6px 16px #0f382b26;
+}
+
+.design-screen [data-pencil-name="View Toggle Dock"] > [data-pencil-name^="View Tab —"][aria-pressed="true"] [data-pencil-name="Tab Label"],
+.design-screen [data-pencil-name="View Toggle Dock"] > [data-pencil-name^="View Tab —"][aria-pressed="true"] [data-pencil-name="Tab Icon"] path {
+  color: #f9f8f6 !important;
+  fill: #f9f8f6 !important;
+}
+
+.design-screen [data-pencil-name="View Toggle Dock"] > [data-pencil-name^="View Tab —"][aria-pressed="true"] [data-pencil-name="Tab Count"] {
+  background: #ffffff26 !important;
+}
+
+.design-screen [data-pencil-name="View Toggle Dock"] > [data-pencil-name^="View Tab —"][aria-pressed="true"] [data-pencil-name="Tab Count"] [data-pencil-name="Count"] {
+  color: #f9f8f6 !important;
+}
+
+@media (max-width: 1200px) {
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="View Toggle Dock"] {
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="View Toggle Dock"] > [data-pencil-name^="View Tab —"] {
+    flex-wrap: nowrap !important;
+    min-height: 60px !important;
+    gap: 7px !important;
+    padding: 9px 10px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="View Toggle Dock"] > [data-pencil-name^="View Tab —"] [data-pencil-name="Tab Label"] {
+    min-width: 0;
+    white-space: normal !important;
+    text-align: center;
+    overflow-wrap: normal;
+  }
+}
+
 @media (min-width: 1201px) {
   .design-screen[data-pencil-name="Siam & Soul — Destinations"] [data-pencil-name="Destination Grid"] {
     display: grid !important;
@@ -1238,5 +1339,117 @@ svg {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Region Weather"] {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 32px 16px 0 !important;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Table Card"] {
+    width: 680px !important;
+    min-width: 680px !important;
+    max-width: none !important;
+    flex: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Table Head"] {
+    flex-direction: row !important;
+    align-items: flex-end !important;
+    padding: 16px 14px 12px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Head Text"] {
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Table Title"] {
+    white-space: nowrap !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Table Note"] {
+    width: auto !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] {
+    display: flex !important;
+    width: 680px !important;
+    min-width: 680px !important;
+    flex-flow: row nowrap !important;
+    align-items: center !important;
+    padding-inline: 14px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] {
+    padding-block: 12px !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"] [data-pencil-name="Column — REGION"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Region"] {
+    width: 90px !important;
+    flex: 0 0 90px !important;
+    text-align: left !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"] [data-pencil-name="Column — BEST MONTHS"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Best Months"] {
+    width: 112px !important;
+    flex: 0 0 112px !important;
+    text-align: left !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"] [data-pencil-name="Column — AVG HIGH"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Avg High"] {
+    width: 76px !important;
+    flex: 0 0 76px !important;
+    text-align: left !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"] [data-pencil-name="Column — RAIN"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Rain"] {
+    width: 64px !important;
+    flex: 0 0 64px !important;
+    text-align: left !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"] [data-pencil-name="Column — CROWDS"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Crowds"] {
+    width: 84px !important;
+    flex: 0 0 84px !important;
+    text-align: left !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Table Header Row"] [data-pencil-name="Column — VERDICT"],
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Verdict"] {
+    width: 210px !important;
+    flex: 0 0 210px !important;
+    text-align: left !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Best Months"]::before,
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Avg High"]::before,
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Rain"]::before,
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Crowds"]::before,
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name^="Weather Row —"] [data-pencil-name="Verdict"]::before {
+    content: none !important;
+  }
+
+  .page-shell[data-responsive="reflow"] .design-screen [data-pencil-name="Weather Footer"] {
+    width: 680px !important;
+    min-width: 680px !important;
+    flex-wrap: nowrap !important;
+    padding-inline: 14px !important;
   }
 }

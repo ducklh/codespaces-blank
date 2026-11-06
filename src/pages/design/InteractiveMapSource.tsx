@@ -32,8 +32,14 @@ export default function InteractiveMapSource() {
     );
     if (!page) return;
 
+    const defaultViewTab = page.querySelector<HTMLElement>(
+      '[data-pencil-name="View Tab — Countrywide Map"]',
+    );
+    defaultViewTab?.setAttribute("aria-pressed", "true");
+
     const mobileViewport = window.matchMedia("(max-width: 1200px)");
     const cleanups: (() => void)[] = [];
+    cleanups.push(() => defaultViewTab?.removeAttribute("aria-pressed"));
 
     mapZoomConfigs.forEach(({
       section: sectionName,
