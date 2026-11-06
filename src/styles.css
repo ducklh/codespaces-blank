@@ -1587,7 +1587,8 @@ svg {
   }
 }
 
-.page-shell[data-mobile="true"] .design-screen .weather-forecast {
+.page-shell[data-mobile="true"] .design-screen .weather-forecast,
+.page-shell[data-mobile="true"] .design-screen[data-pencil-name="Siam & Soul — Home"] [data-pencil-name="When To Go"] {
   display: none !important;
 }
 
