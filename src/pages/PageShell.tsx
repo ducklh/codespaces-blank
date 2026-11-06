@@ -162,11 +162,7 @@ export default function PageShell({ children }: { children: ReactNode }) {
     observer.observe(frame);
     if (frame.parentElement) observer.observe(frame.parentElement);
     window.addEventListener("resize", updateSize);
-    const mutationObserver = new MutationObserver(() => {
-      const availableWidth = frame.parentElement?.clientWidth || window.innerWidth;
-      const reflow = availableWidth <= REFLOW_BREAKPOINT;
-      updateResponsiveStyles(reflow, Math.min(1, (availableWidth + 100) / DESIGN_WIDTH));
-    });
+    const mutationObserver = new MutationObserver(updateSize);
     mutationObserver.observe(frame, { childList: true, subtree: true, attributes: true, attributeFilter: ["class"] });
 
     return () => {
