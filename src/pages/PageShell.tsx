@@ -13,6 +13,7 @@ function getInitialDimensions() {
     scale: reflow ? 1 : Math.min(1, availableWidth / DESIGN_WIDTH),
     height: 0,
     reflow,
+    mobile: availableWidth <= 600,
   };
 }
 
@@ -165,6 +166,7 @@ export default function PageShell({ children }: { children: ReactNode }) {
         scale: layoutScale,
         height: Math.ceil(frame.scrollHeight * layoutScale),
         reflow,
+        mobile: availableWidth <= 600,
       });
     };
 
@@ -187,6 +189,7 @@ export default function PageShell({ children }: { children: ReactNode }) {
     <div
       className="page-shell"
       data-responsive={dimensions.reflow ? "reflow" : undefined}
+      data-mobile={dimensions.mobile ? "true" : undefined}
       style={{ height: dimensions.height ? `${dimensions.height}px` : undefined }}
     >
       <div

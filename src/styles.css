@@ -1587,10 +1587,8 @@ svg {
   }
 }
 
-@media (max-width: 600px) {
-  .design-screen .weather-forecast {
-    display: none !important;
-  }
+.page-shell[data-mobile="true"] .design-screen .weather-forecast {
+  display: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
